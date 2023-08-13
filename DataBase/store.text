@@ -1,0 +1,79 @@
+ create database store;
+-----------------
+create table countries (
+    code int  primary key ,
+    name varchar(20)  unique ,
+    continent_name varchar(20)  NOT NULL 
+)
+-----------------------------
+create table products (
+    id int  primary key ,
+    name varchar(10)  NOT NULL ,
+    price int  default 0,
+    status varchar(10) check(status ='vaild' or status ='expired'),
+    created_at datetime default cuurent_timestamp
+    
+)
+ --------------------------------
+
+create table orders (
+    id int  primary key ,
+    status varchar(6) check(status ='start' or status = 'finish'),
+    user_id int ,
+    foreign key (user_id) references  users(id),
+    created_at datetime default cuurent_timestamp
+)
+---------------------------------
+create table users (
+    id int  primary key ,
+    full_name varchar(20)  NOT NULL ,
+    email varchar(20) unique,
+    gender char (1) check (gender = 'm' or  gender ='f'),
+    date_of_brith varchar(15),
+    created_at date datetime default cuurent_timestamp,
+    country_code int ,
+    foreign key (country_code) references contries(code)
+)
+-----------------------------
+create table order_products (
+   order_id int ,
+    foreign key (order_id) references orders(id),
+    quantity int default 0,
+    product_id int ,
+    foreign key (product_id) references products(id)
+)
+--------------------------------
+
+add row to countries table .
+
+insert  into countries values  (1,'abdulaziz','Riyadh');
+
+add row to users table  .
+
+insert  into users values  (1,'abdulazizAljabri','zzeezz172@gmail.com','m','2000-12-01',1);
+
+add row to orders table .
+
+insert  into orders values  (1,'start',1);
+
+add row to products table.
+
+insert  into products values  (1,'book',1,'vaild');
+
+add row to order_products table.
+
+insert  into order_products values  (1,2,1);
+
+Delete row from products table .
+
+delete from  products where id='1';
+
+update row from countries table .
+
+update  countries set  name='jeddah' where id='1';
+
+---------------------------------------------------------
+
+
+
+
